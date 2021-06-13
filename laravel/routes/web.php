@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+// Disable registration
+//Auth::routes(['register' => false]); 
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('admin/home', [HomeController::class, 'admin'])->name('admin')->middleware('admin');
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    //Route::get('manage', 'App\Http\Controllers\UserController@manage')->middleware('auth');
+    Route::get('/manage', function () {
+        return view('manage');
+    });
+});
+
+/**
+ * Social Login
+ */
+// Route::get('auth/{provider}/login', 'Auth\SocialAuthController@redirectToProvider')->name('social.login');
+// Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
