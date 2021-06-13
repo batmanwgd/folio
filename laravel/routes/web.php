@@ -24,7 +24,7 @@ Auth::routes();
 //Auth::routes(['register' => false]); 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('admin/home', [HomeController::class, 'admin'])->name('admin')->middleware('admin');
+Route::get('baws/home', [HomeController::class, 'baws'])->name('baws')->middleware('baws');
 Route::group(['middleware' => ['auth', 'verified']], function () {
     //Route::get('manage', 'App\Http\Controllers\UserController@manage')->middleware('auth');
     Route::get('/manage', function () {
