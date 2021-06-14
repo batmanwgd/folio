@@ -32,6 +32,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     });
 });
 
+// Folio 
+Route::get('/folio', function () {
+    return view('folio/main');
+});
+Route::get('/folio/home', function () {
+    return view('folio/home');
+});
+
 /**
  * Social Login
  */
